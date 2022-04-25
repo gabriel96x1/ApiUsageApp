@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigation.selectedItemId = R.id.stores
 
-        makeCurrentFragment(storeFragment)
+        makeCurrentFragmentHideAppBar(storeFragment)
 
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {

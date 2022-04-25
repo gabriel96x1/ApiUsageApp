@@ -34,18 +34,19 @@ class StoresFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = StoresFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         viewModel = ViewModelProvider(this)[StoresViewModel::class.java]
         viewModel.getAllStores()
 
         viewModel.storeList.observe(viewLifecycleOwner, Observer {
             stores = it
         })
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
         Log.d("Stores", stores.toString())
         rView = binding.recycler
         adapter = StoreAdapter(stores, stores.size)

@@ -17,6 +17,10 @@ class ProductsViewModel  @Inject constructor(
     val productList = MutableLiveData<List<Product>>()
     val errorMessage = MutableLiveData<String>()
 
+    init {
+        getAllProducts()
+    }
+
     fun getAllProducts(){
         val response = repository.getAllProducts()
         response.enqueue(object : Callback<List<Product>> {

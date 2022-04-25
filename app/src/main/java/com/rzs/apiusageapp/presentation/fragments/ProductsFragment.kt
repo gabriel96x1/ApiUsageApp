@@ -1,10 +1,12 @@
 package com.rzs.apiusageapp.presentation.fragments
 
+import android.app.SearchManager
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.SearchView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,11 +41,6 @@ class ProductsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = ProductsFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[ProductsViewModel::class.java]
 
         viewModel.getAllProducts()
@@ -51,15 +48,18 @@ class ProductsFragment : Fragment() {
         viewModel.productList.observe(viewLifecycleOwner, Observer {
             products = it
         })
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         Log.d("Products", products.toString())
         rView = binding.recycler
         adapter = ProductAdapter(products, products.size)
         rView.layoutManager = LinearLayoutManager(context)
         rView.adapter = adapter
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
 
     }
 
